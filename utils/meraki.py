@@ -82,6 +82,15 @@ class EOS:
         print("All EoS's are unlikely.")
 
     def get_pe_quantiles(self, interp_densities, quantiles, cgs_press = True, get_median = False, store_sigmas = False):
+        """
+        Function to obtain X% C.L envelopes of EoS distribution in pressure-density space. 
+        Arguments follow: 
+        - interpolation density range
+        - percentiles to calculate contour for
+        - boolean for CGS unit conversion
+        - boolean for obtaining median EoS
+        - storing the quantiles along with the EoS object
+        """
         pdvals = []
         # Obtain quantiles for the prior set of EoS's
         for eos in self.eos_index_rng:
@@ -111,6 +120,15 @@ class EOS:
             self.pd_quantiles = pd_sigmas
 
     def get_cs_quantiles(self, interp_densities, quantiles, get_median = False, store_sigmas = False):
+        """
+        Function to obtain X% C.L envelopes of EoS distribution in speed of sound-density space. 
+        Arguments follow: 
+        - interpolation density range
+        - percentiles to calculate contour for
+        - boolean for CGS unit conversion
+        - boolean for obtaining median EoS
+        - storing the quantiles along with the EoS object
+        """
         csvals = []
         # Obtain sound speed quantiles for a set of EoS's
         for eos in self.eos_index_rng:
@@ -145,6 +163,15 @@ def get_and_load_weights(weights, astro_tag, eos_set_to_use, Neff = False, repla
     """
     Returns a collection of downsampled EoS according to their likelihood from some astrophysical observation.
     Assumes correlation and matched weights with respective EoS set via "eos_to_be_used".
+    Arguments follow:
+    - file containing the weights (in .csv format)
+    - tag for looking up appropriate astrophysical weights in weights file.
+    - array of EoS indices, used for enumerating EoS
+    - boolean for obtaining/displaying the number of effective samples given the weights used to sample the EoS distribution.
+    - boolean for bootstrapping EoS's when resampling with astrophysical weights. 
+    - integer value for the number of EoS in the posterior distribution.
+
+    Returns weighted EoS's according their index. 
     """
     ### sample EoS's according to astro weights
     try:
