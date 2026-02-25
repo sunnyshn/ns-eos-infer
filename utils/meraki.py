@@ -60,12 +60,17 @@ class EOS:
                 raise KeyError("Unable ot map EoS macroscopic data to enumerated list.") from error
         
     @staticmethod
-    def load_samples(h5file, filetype = "h5", load_micro = False, load_macro = False):
+    def load_samples(h5file, filetype = "h5", load_micro = False, load_macro = False, downsample = False, specific_rng = None):
 
         if filetype == "h5":
             samples = h5py.File(h5file)
             eos_to_be_used = np.arange(len(samples["eos"]))
-            
+
+            if downsample:
+                try:
+                    eos_to_be_used = specific_rng
+                except Exception as err: 
+                    raise ValueError("Unable to load specific EoS indices. Re-check EoS indices.") from err
             return EOS(samples, eos_to_be_used, load_micro = load_micro, load_macro = load_macro)
         else:
             raise KeyError("File type not supported.")
