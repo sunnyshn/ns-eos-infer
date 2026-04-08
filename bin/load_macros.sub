@@ -1,0 +1,19 @@
+universe = vanilla
+get_env = True 
+executable = /home/sunny.ng/semiparameos/bin/load_macros.sh
+log = /home/sunny.ng/semiparameos/output/submission/runinfo/macros_load.log
+output = /home/sunny.ng/semiparameos/output/submission/runinfo/macros_load.out
+error = /home/sunny.ng/semiparameos/output/submission/runinfo/macros_load.err
+stream_error = True
+stream_input = True
+stream_output = True
+request_cpus = 32
+request_disk = 4 GB
+request_memory = 10 GB
+should_transfer_files = YES
+accounting_group = ligo.sim.o4.cbc.extremematter.bilby
+batch_name = GenEOS
+queue 1
+
+
+
