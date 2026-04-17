@@ -51,11 +51,11 @@ class GP:
         e_extension = sol.y[0, :]
         p_extension = sol.y[1, :]
         return pd.DataFrame({rho_column:np.concatenate([crust_eos[rho_column],
-                                                        rho_to_integrate_to[1:]]),
+                                                        rho_to_integrate_to]),
                              p_column:np.concatenate([crust_eos[p_column],
-                                                      p_extension[1:]]),
+                                                      p_extension]),
                              e_column:np.concatenate([crust_eos[e_column],
-                                                     e_extension[1:]
+                                                     e_extension
                              ])})
     def condition(self, value, point_to_condition_at="minimal"):
         """
